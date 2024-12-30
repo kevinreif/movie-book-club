@@ -2,9 +2,13 @@ package com.example.application.views;
 
 import com.example.application.data.User;
 import com.example.application.security.AuthenticatedUser;
+import com.example.application.views.addperson.AddPersonView;
+import com.example.application.views.choosemovie.ChooseMovieView;
 import com.example.application.views.home.HomeView;
+import com.example.application.views.movielist.MovieListView;
 import com.example.application.views.myview.MyViewView;
-import com.example.application.views.personform.PersonFormView;
+import com.example.application.views.addmovie.AddMovieView;
+import com.example.application.views.selectmovie.FindMovieView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.avatar.Avatar;
@@ -108,9 +112,9 @@ public class MainLayout extends AppLayout {
             User user = maybeUser.get();
 
             Avatar avatar = new Avatar(user.getName());
-            StreamResource resource = new StreamResource("profile-pic",
-                    () -> new ByteArrayInputStream(user.getProfilePicture()));
-            avatar.setImageResource(resource);
+            //StreamResource resource = new StreamResource("profile-pic",
+            //        () -> new ByteArrayInputStream(user.getProfilePicture()));
+            //avatar.setImageResource(resource);
             avatar.setThemeName("xsmall");
             avatar.getElement().setAttribute("tabindex", "-1");
 
@@ -159,9 +163,17 @@ public class MainLayout extends AppLayout {
         return new MenuItemInfo[]{ //
                 new MenuItemInfo("Home", LineAwesomeIcon.HOME_SOLID.create(), HomeView.class), //
 
-                new MenuItemInfo("Person Form", LineAwesomeIcon.USER.create(), PersonFormView.class), //
+                new MenuItemInfo("Add Movie", LineAwesomeIcon.USER.create(), AddMovieView.class), //
 
                 new MenuItemInfo("My View", LineAwesomeIcon.PENCIL_RULER_SOLID.create(), MyViewView.class), //
+
+                new MenuItemInfo("Movie List", LineAwesomeIcon.FILM_SOLID.create(), MovieListView.class),
+
+                new MenuItemInfo("Choose Movie", LineAwesomeIcon.TICKET_ALT_SOLID.create(), ChooseMovieView.class),
+
+                new MenuItemInfo("Add Person", LineAwesomeIcon.USER.create(), AddPersonView.class),
+
+                new MenuItemInfo("Find Movie", LineAwesomeIcon.SEARCH_SOLID.create(), FindMovieView.class)
 
         };
     }
