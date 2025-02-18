@@ -142,7 +142,7 @@ public class AddPersonView extends Composite<VerticalLayout> {
     }
 
     private void refreshGrid(UserRepository userRepository) {
-
+        grid.getDataProvider().refreshAll();
     }
 
 

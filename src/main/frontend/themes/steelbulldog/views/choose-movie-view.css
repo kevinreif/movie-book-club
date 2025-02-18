@@ -74,7 +74,7 @@ body {
     height: 30px;
     background: #fff;
     clip-path: polygon(100% 50%, 0 85%, 0 15%);
-    */transform: rotate(90deg);*/
+    /*transform: rotate(90deg);*/
 }
 
 
@@ -252,6 +252,18 @@ transform: rotate(3600deg);
     background: #730a00;}
 .umbrella_segment:nth-child(30) { transform: rotate(348deg);
     background: #bcbcbc; }
-*/
+
+.wheel .umbrella_segment .title {
+    width: 40%;
+    position: relative;
+    transform: rotate(45deg);
+    font-size: 1em;
+    font-weight: 600;
+    color: #333;
+    text-shadow: 3px 5px 2px rgba(0,0,0,0.15);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
 
 

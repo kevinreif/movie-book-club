@@ -5,8 +5,6 @@ import com.example.application.data.CurrentMovieRepository;
 import com.example.application.data.QueuedMovie;
 import com.example.application.data.QueuedMovieRepository;
 import com.example.application.holder.Holder;
-import com.flowingcode.vaadin.addons.flipcard.FlipCard;
-
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
@@ -29,7 +27,6 @@ import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.shared.ui.Transport;
-import de.mekaso.vaadin.addons.Carousel;
 import jakarta.annotation.security.RolesAllowed;
 
 import javax.swing.*;
@@ -50,7 +47,7 @@ public class ChooseMovieView extends Composite<VerticalLayout> {
     private List<Long> movieList;
     private List<String> posterURLs;
     private VerticalLayout wheelLayout = new VerticalLayout();
-    private HorizontalLayout buttonLayout = new HorizontalLayout();
+    //private HorizontalLayout buttonLayout = new HorizontalLayout();
     private final QueuedMovieRepository queuedMovieRepository;
     private final CurrentMovieRepository currentMovieRepository;
     private Button randomize = new Button("Randomize");
@@ -94,11 +91,11 @@ public class ChooseMovieView extends Composite<VerticalLayout> {
 
 
         wheelLayout.setWidthFull();
-        getContent().add(wheelLayout, buttonLayout);
+        getContent().add(wheelLayout/*, buttonLayout*/);
 
         confirm.addClickListener(e -> confirmDialog.open());
 
-        buttonLayout.add(confirm);
+        //buttonLayout.add(confirm);
         configureChooseMovieDialog();
 
         confirmDialog.add(chooseMovieDialog);

@@ -10,6 +10,7 @@ public abstract class Movie {
     // The initial value is to account for data.sql demo data ids
     @SequenceGenerator(name = "idgenerator", initialValue = 1000)
     private Long id;
+
     private String picker;
     private String title;
     private String year;

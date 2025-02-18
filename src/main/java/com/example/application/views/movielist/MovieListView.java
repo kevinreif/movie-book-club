@@ -62,11 +62,11 @@ public class MovieListView extends Div {
     private final ReservedMovieService reservedMovieService;
     private final QueuedMovieRepository queuedMovieRepository;
     private final ReservedMovieRepository reservedMovieRepository;
-    private static HorizontalLayout actionsLayout = new HorizontalLayout();
+    private HorizontalLayout actionsLayout = new HorizontalLayout();
     private HorizontalLayout convertLayout = new HorizontalLayout();
-    private static Select<String> selectGrid = new Select<>();
+    private Select<String> selectGrid = new Select<>();
     private VerticalLayout layout = new VerticalLayout();
-    private Button sendQeueud = new Button("To Queued");
+    private Button sendQueued = new Button("To Queued");
     private Button sendReserved = new Button("To Reserved");
     private Button deleteQueued = new Button("Delete");
     private Button deleteRes = new Button("Delete");
@@ -90,7 +90,7 @@ public class MovieListView extends Div {
         selectGrid.setItems("Queued List", "Reserved List");
         selectGrid.setValue("Queued List");
 
-        sendQeueud.addClickListener(e -> SendToQueued());
+        sendQueued.addClickListener(e -> SendToQueued());
         sendReserved.addClickListener(e -> SendToReserved());
 
         deleteQueued.addClickListener(e -> DeleteQueued());
@@ -139,52 +139,26 @@ public class MovieListView extends Div {
     }
 
     private void chooseGrid() {
-        if (isQueued == true) {
-            layout.removeAll();
-            actionsLayout.removeAll();
-            convertLayout.removeAll();
+        layout.removeAll();
+        //actionsLayout.removeAll();
+        convertLayout.removeAll();
+
+        if (isQueued) {
             qFilters = new Filters(() -> refreshQueuedGrid());
             layout.add(qFilters, createQueuedGrid());
             convertLayout.add(sendReserved, deleteQueued);
         } else {
-            layout.removeAll();
-            actionsLayout.removeAll();
-            convertLayout.removeAll();
             rFilters = new RFilters(() -> refreshResGrid());
             layout.add(rFilters, createResGrid());
-            convertLayout.add(sendQeueud, deleteRes);
+            convertLayout.add(sendQueued, deleteRes);
 
         }
 
 
     }
 
-    /*private HorizontalLayout createMobileFilters() {
-        // Mobile version
-        HorizontalLayout mobileFilters = new HorizontalLayout();
-        mobileFilters.setWidthFull();
-        mobileFilters.addClassNames(LumoUtility.Padding.MEDIUM, LumoUtility.BoxSizing.BORDER,
-                LumoUtility.AlignItems.CENTER);
-        mobileFilters.addClassName("mobile-filters");
-
-        Icon mobileIcon = new Icon("lumo", "plus");
-        Span filtersHeading = new Span("Filters");
-        mobileFilters.add(mobileIcon, filtersHeading);
-        mobileFilters.setFlexGrow(1, filtersHeading);
-        mobileFilters.addClickListener(e -> {
-            if (filters.getClassNames().contains("visible")) {
-                filters.removeClassName("visible");
-                mobileIcon.getElement().setAttribute("icon", "lumo:plus");
-            } else {
-                filters.addClassName("visible");
-                mobileIcon.getElement().setAttribute("icon", "lumo:minus");
-            }
-        });
-        return mobileFilters;
-    }*/
-
     //Queued Filters
-    public static class Filters extends Div implements Specification<QueuedMovie> {
+    public class Filters extends Div implements Specification<QueuedMovie> {
 
         private final CheckboxGroup<String> person = new CheckboxGroup<>("Chosen by: ");
 
@@ -195,7 +169,7 @@ public class MovieListView extends Div {
             addClassNames(LumoUtility.Padding.Horizontal.LARGE, LumoUtility.Padding.Vertical.MEDIUM,
                     LumoUtility.BoxSizing.BORDER);
 
-            person.setItems("Ben", "Dylan", "Eli", "Kevin", "Phill", "Robby");
+            person.setItems("Ben", "Dylan", "Eli", "Kevin", "Phill", "Robbie");
             person.addClassName("double-width");
             person.addValueChangeListener(e -> onSearch.run());
 
@@ -210,6 +184,7 @@ public class MovieListView extends Div {
             searchBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
             searchBtn.addClickListener(e -> onSearch.run());
 
+            actionsLayout.removeAll();
             actionsLayout.add(person, resetBtn/*, searchBtn*/, selectGrid);
             actionsLayout.setWidthFull();
             actionsLayout.setAlignItems(FlexComponent.Alignment.BASELINE);
@@ -238,7 +213,7 @@ public class MovieListView extends Div {
     }
 
     //Reserved Filters
-    public static class RFilters extends Div implements Specification<ReservedMovie> {
+    public class RFilters extends Div implements Specification<ReservedMovie> {
 
         private final CheckboxGroup<String> person = new CheckboxGroup<>("Chosen by: ");
 
@@ -269,6 +244,7 @@ public class MovieListView extends Div {
             searchBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
             searchBtn.addClickListener(e -> onSearch.run());
 
+            actionsLayout.removeAll();
             actionsLayout.add(person, resetBtn/*, searchBtn*/, selectGrid);
             actionsLayout.setWidthFull();
             actionsLayout.setAlignItems(FlexComponent.Alignment.BASELINE);

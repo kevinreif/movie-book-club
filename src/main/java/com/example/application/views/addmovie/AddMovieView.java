@@ -65,8 +65,8 @@ public class AddMovieView extends Composite<VerticalLayout> {
     ListBox<String> movieDetails = new ListBox<>();
 
     String apiKey = ApiKeys.OMDB_KEY;
-    QueuedMovie qMovie = new QueuedMovie();
-    ReservedMovie rMovie = new ReservedMovie();
+    QueuedMovie qMovie;
+    ReservedMovie rMovie;
     Gson gson = new Gson();
     TextField movieSearch = new TextField("Find Movie");
     TextField yearSearch = new TextField("Year");
@@ -201,6 +201,7 @@ public class AddMovieView extends Composite<VerticalLayout> {
         Map<String, String> map = gson.fromJson(response.body(), new TypeToken<>() {
         }.getType());
 
+        qMovie = new QueuedMovie();
         qMovie.setTitle(map.get("Title"));
         qMovie.setYear(map.get("Year"));
         qMovie.setRuntime(map.get("Runtime"));
@@ -247,6 +248,7 @@ public class AddMovieView extends Composite<VerticalLayout> {
     }
 
     private void SaveReservedMovie() {
+        rMovie = new ReservedMovie();
         rMovie.setPicker(picker.getValue().toString());
         rMovie.setTitle(qMovie.getTitle());
         rMovie.setYear(qMovie.getYear());
