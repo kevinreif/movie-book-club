@@ -1,22 +1,20 @@
-# Use an OpenJDK base image
+# Stage 1: Build the application using Maven
 FROM maven:3.9.6-eclipse-temurin-21 AS build
-
-# Set the working directory inside the container
 WORKDIR /app
 
 # Copy project files and build the JAR
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Use a lightweight JDK image to run the app
-FROM eclipse-temurin:21-jdk-slim
+# Stage 2: Run the application using a JDK image
+FROM eclipse-temurin:21-jdk
 WORKDIR /app
 
-# Copy the built JAR file into the container
+# Copy the JAR file from the build stage
 COPY --from=build /app/target/steelbulldog-1.0-SNAPSHOT.jar /app/vaadin-app.jar
 
-# Expose the port used by the application
+# Expose the application port
 EXPOSE 8080
 
-# Command to run the application
+# Run the application
 CMD ["java", "-jar", "/app/vaadin-app.jar"]
