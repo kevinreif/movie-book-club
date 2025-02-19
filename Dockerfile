@@ -13,6 +13,9 @@ WORKDIR /app
 # Copy the JAR file from the build stage
 COPY --from=build /app/target/steelbulldog-1.0-SNAPSHOT.jar /app/vaadin-app.jar
 
+# Copy frontend (includes themes)
+COPY --from=build /app/src/main/frontend /app/src/main/frontend
+
 # Expose the application port
 EXPOSE 8080
 
