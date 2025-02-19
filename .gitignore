@@ -10,7 +10,7 @@
 
 # The following files are generated/updated by vaadin-maven-plugin
 node_modules/
-src/main/frontend/generated/
+#src/main/frontend/generated/
 pnpmfile.js
 vite.generated.ts
 
@@ -21,7 +21,7 @@ error-screenshots/
 webpack.generated.js
 
 # Ignore application property files
-application.properties
+src/application.properties
 
 # Ignore files with API keys
 ApiKeys.java
