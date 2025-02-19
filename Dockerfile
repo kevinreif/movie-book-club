@@ -1,5 +1,5 @@
 # Use an OpenJDK base image
-FROM maven:4.0.0-openjdk-21 AS build
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -9,7 +9,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # Use a lightweight JDK image to run the app
-FROM openjdk:21-jdk-slim
+FROM eclipse-temurin:21-jdk-slim
 WORKDIR /app
 
 # Copy the built JAR file into the container
